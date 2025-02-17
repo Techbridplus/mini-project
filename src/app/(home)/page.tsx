@@ -2,7 +2,7 @@ import React from 'react'
 
 import HomePage from '@/components/home'
 import { initialProfile } from "@/lib/initial-profile";
-import NevigationSidebar from '@/components/nevigation/nevigationSidebar'
+import HomeNevigationSidebar from '@/components/nevigation/HomeNevigationSidebar'
 
  async function Home() {
     
@@ -11,7 +11,7 @@ import NevigationSidebar from '@/components/nevigation/nevigationSidebar'
     return (
         <div className='h-full flex'>
            <div className='bg-red-400 w-[72px] hidden md:block '>
-                <NevigationSidebar/>
+                <HomeNevigationSidebar/>
            </div>
            <main className='  w-full bg-[#FFFFFF] dark:bg-[#3a3c3f]'>
                 <HomePage/>

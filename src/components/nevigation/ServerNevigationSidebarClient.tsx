@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import  ModeToggle  from "@/components/mode-toggle";
 import {NavigationItemSkeleton} from "@/components/nevigation/navigation-item-skeleton";
 import { NavigationItem } from "@/components/nevigation/navigation-item";
+import { House } from 'lucide-react';
 
 interface Server {
     id: string;
@@ -22,7 +23,7 @@ interface Server {
 interface NevigationSidebarClientProps {
     servers: Server[];
 }
-function NevigationSidebarClient({servers}:NevigationSidebarClientProps) {
+function ServerNevigationSidebarClient() {
     
     const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState([1,2,3,4,5,6,7,8,9,10]); 
@@ -33,10 +34,15 @@ function NevigationSidebarClient({servers}:NevigationSidebarClientProps) {
     }, []);
     return (
         <div className="space-y-4 flex flex-col h-full items-center text-primary w-full dark:bg-[#1e1f22] bg-[#25d366] py-3">
-        <NavigationAction />
+        <House />
+        {/* <NavigationItem
+              id={server.id}
+              imageUrl={server.imageUrl}
+              name={server.name}
+            /> */}
         <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
         <ScrollArea className="flex-1 w-full">
-          {isLoading ? servers.map((id)=>(
+          {/* {isLoading ? servers.map((id)=>(
             <div key={id.id} className='mb-4'>
               <NavigationItemSkeleton />
             </div>
@@ -49,7 +55,7 @@ function NevigationSidebarClient({servers}:NevigationSidebarClientProps) {
               name={server.name}
             />
           </div>
-        ))}
+        ))} */}
       </ScrollArea>
         <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
         <ModeToggle />
@@ -67,4 +73,4 @@ function NevigationSidebarClient({servers}:NevigationSidebarClientProps) {
     )
 }
 
-export default NevigationSidebarClient
+export default ServerNevigationSidebarClient
