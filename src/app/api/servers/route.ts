@@ -11,12 +11,12 @@ export async function POST(req: Request) {
     const user = await currentProfile();
 
     if (!user) return new NextResponse("Unauthorized", { status: 401 });
-    if (!name || !imageUrl) {
+    
+    if (!name || !imageUrl){
       return new NextResponse("Invalid data", { status: 400 });
     }
 
-    console.log("name ", name);
-    console.log("imageUrl ", imageUrl);
+  
     const server = await db.server.create({
       data: {
         userId: user.id,

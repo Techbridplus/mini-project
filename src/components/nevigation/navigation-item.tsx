@@ -2,8 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-
+import { redirect, useParams, useRouter } from "next/navigation";
+import { Redirect } from "next";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 
@@ -11,15 +11,14 @@ interface NavigationItemProps {
   id: string;
   imageUrl: string;
   name: string;
+  serverId: string;
 }
 
-export function NavigationItem({ id, imageUrl, name }: NavigationItemProps) {
+export function NavigationItem({ serverId,id, imageUrl, name }: NavigationItemProps) {
   const params = useParams();
-  const router = useRouter();
 
   const onClick = () => {
-    console.log("id", id);
-    router.push(`/servers/${id}?name=${encodeURIComponent(name)}`);
+    return redirect(`/servers/${serverId}/groups/${id}`);
   };
 
   return (

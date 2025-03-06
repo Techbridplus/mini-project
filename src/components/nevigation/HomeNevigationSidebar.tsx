@@ -18,6 +18,9 @@ async function HomeNevigationSidebar()  {
           userId: profile.id
         }
       }
+    },
+    orderBy: {
+      createdAt: 'desc'
     }
   });
 

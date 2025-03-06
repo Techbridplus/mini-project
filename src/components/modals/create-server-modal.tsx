@@ -52,9 +52,8 @@ export function CreateServerModal() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post("/api/servers", values);
-
       form.reset();
-      router.refresh();
+      window.location.reload()
       onClose();
     } catch (error) {
       console.error(error);
@@ -120,7 +119,7 @@ export function CreateServerModal() {
               />
             </div>
             <DialogFooter className="bg-gray-300 px-6 py-4">
-              <Button disabled={isLoading} variant="secondary">
+              <Button disabled={isLoading} variant="primary">
                 Create
               </Button>
             </DialogFooter>

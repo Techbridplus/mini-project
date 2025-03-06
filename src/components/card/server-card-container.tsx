@@ -7,9 +7,12 @@ import { ServerCardSkeleton } from "@/components/card/server-card-skeleton"
 interface ServerCardContainerProps {
   imageUrl: string
   title: string
+  userId: string
+  serverUserId: string
+  serverId: string
 }
 
-export function ServerCardContainer({ imageUrl, title }: ServerCardContainerProps) {
+export function ServerCardContainer({ imageUrl, title, userId, serverUserId, serverId }: ServerCardContainerProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -25,6 +28,6 @@ export function ServerCardContainer({ imageUrl, title }: ServerCardContainerProp
     return <ServerCardSkeleton />
   }
 
-  return <ServerCard imageUrl={imageUrl} title={title} />
+  return <ServerCard imageUrl={imageUrl} title={title} userId={userId} serverUserId={serverUserId} serverId={serverId}/>
 }
 

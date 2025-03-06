@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area";
 import  ModeToggle  from "@/components/mode-toggle";
 import {NavigationItemSkeleton} from "@/components/nevigation/navigation-item-skeleton";
-import { NavigationItem } from "@/components/nevigation/navigation-item";
+import { HomeNavigationItem } from "@/components/nevigation/HomeNevigationItem";
 
 interface Server {
     id: string;
@@ -43,7 +43,7 @@ function HomeNevigationSidebarClient({servers}: NevigationSidebarClientProps) {
           )):
           servers.map((server) => (
           <div key={server.id} className="mb-4">
-            <NavigationItem
+            <HomeNavigationItem
               id={server.id}
               imageUrl={server.imageUrl}
               name={server.name}

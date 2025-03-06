@@ -11,7 +11,7 @@ import { twMerge } from 'tailwind-merge'
 interface FileUploadProps {
   onChange: (url?: string) => void;
   value: string;
-  endpoint: "serverImage";
+  endpoint: "serverImage"|"messageFile";
 }
 
  export const FileUpload: React.FC<FileUploadProps> = ({ endpoint, onChange,value }) => {
