@@ -52,7 +52,7 @@ const ServerList = ({ profileId, apiUrl }: ServerListProps) => {
 
   return (
     <div className="flex-1 flex flex-col py-4 overflow-y-auto h-[640px] " ref={serverRef}>
-      <div className="grid md:grid-cols-3 grid-cols-2 gap-4 md:ml-10">
+      <div className="grid md:grid-cols-3 grid-cols-2 gap-4 mx-1 md:ml-10">
         {data?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.items.map((server: Server) => (

@@ -67,7 +67,7 @@ const QRCodeScanner = () => {
             <ScanQrCode />
         </button>
       ) : (
-        <Card className="w-[400px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50">
+        <Card className="md:w-[400px] w-[330px] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white z-50">
           <CardHeader>
             <CardTitle className="text-center">QR Code Scanner</CardTitle>
           </CardHeader>
