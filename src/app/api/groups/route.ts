@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 
 export async function POST(req: Request) {
   try {
-    const { name, imageUrl,groupId ,serverId} = await req.json();
+    const { name, imageUrl,serverId} = await req.json();
     const user = await currentProfile();
 
     if (!user) return new NextResponse("Unauthorized", { status: 401 });
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     // console.log("name ", name);
     // console.log("imageUrl ", imageUrl);
-    const server = await db.group.create({
+    const group = await db.group.create({
       data: {
         userId: user.id,
         name: name||"",
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
       }
     });
 
-    return NextResponse.json(server);
+    return NextResponse.json(group);
   } catch (error) {
     console.error("[GROUPS_POST]", error);
     return new NextResponse("Internal Error", { status: 500 });

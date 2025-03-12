@@ -38,7 +38,7 @@ function ServerNevigationSidebarClient({serverId,name,imageUrl,groups}: {serverI
       }, 2000);
     }, []);
     const onClick = () => {
-      return redirect(`/servers/${serverId}?name=${encodeURIComponent(name)}`);  
+      return redirect(`/servers/${serverId}`);  
     }
     
     return (

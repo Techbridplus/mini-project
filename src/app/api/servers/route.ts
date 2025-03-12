@@ -33,3 +33,34 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+
+export async function GET(req: Request) {
+  try {
+    const url = new URL(req.url);
+    const query = url.searchParams.get("query") || "";
+    const user = await currentProfile();
+
+    if (!user) return new NextResponse("Unauthorized", { status: 401 });
+    
+
+  
+    const servers =  await db.server.findMany({
+      where: {
+        name: {
+          contains: query,
+          mode: "insensitive", // Case-insensitive search
+        },
+      },
+      include: {
+        user: true, // Include user information if needed
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return NextResponse.json(servers);
+  } catch (error) {
+    console.error("[SERVERS_POST]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}

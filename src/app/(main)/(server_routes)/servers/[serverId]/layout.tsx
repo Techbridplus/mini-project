@@ -14,6 +14,7 @@ async function Layout({ children, params }: LayoutProps) {
       <div className='bg-red-400 w-[72px] hidden md:block'>
         <ServerNevigationSidebar serverId={serverId} />
       </div>
+      
       <main className='w-full bg-[#FFFFFF] dark:bg-[#3a3c3f]'>
         {children}
       </main>

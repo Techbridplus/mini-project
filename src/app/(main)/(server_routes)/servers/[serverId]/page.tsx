@@ -2,7 +2,11 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { currentProfile } from "@/lib/current-profile";
 import ServerPage from "@/components/server/server-page";
+import ServerHeader from "@/components/server/server-header";
+import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/db";
+import { MobileToggle } from "@/components/mobile-toggle";
+
 interface ServerIdPageProps {
   params: Promise<{
     serverId: string;
@@ -42,6 +46,12 @@ export default async function ServerIdPage({ params }: ServerIdPageProps) {
 
   return (
     <div>
+      <div className="flex items-center justify-between">
+        <MobileToggle serverId={serverId} groupId="" />
+        <ServerHeader serverId={serverId} role={role} server={server} />
+      </div>
+      
+      <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
       <ServerPage serverId={serverId} role={role} server={server} />
     </div>
   )

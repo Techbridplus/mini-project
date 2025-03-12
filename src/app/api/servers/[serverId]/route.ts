@@ -51,3 +51,27 @@ export async function DELETE(
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { serverId: string } }
+) {
+  try {
+    const profile = await currentProfile();
+    if(!profile) return new NextResponse("Unauthorized", { status: 401 });
+    const {serverId} = params;
+    if (!serverId) return new NextResponse("Server ID Missing", { status: 400 });
+
+    const server = await db.server.findFirst({
+      where: { id: serverId, userId: profile.id },
+      include: { groups: true }
+    });
+
+    if (!server) return new NextResponse("Not Found", { status: 404 });
+
+    return NextResponse.json(server);
+  } catch (error) {
+    console.error("[SERVER_ID_GET]", error);
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
+}

@@ -26,7 +26,7 @@ async function HomeNevigationSidebar()  {
 
 
     return (
-        <HomeNevigationSidebarClient  servers={servers} />
+        <HomeNevigationSidebarClient  servers={servers} profileId={profile.userId} />
     )
 }
 

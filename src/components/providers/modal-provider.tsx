@@ -12,7 +12,7 @@ import { DeleteChannelModal } from "@/components/modals/delete-channel-modal";
 import { EditChannelModal } from "@/components/modals/edit-channel-modal";
 import { DeleteMessageModal } from "@/components/modals/delete-message-modal";
 import { MessageFileModal } from "@/components/modals/message-file-modal";
-import  CreateGroupModal  from "@/components/modals/create-group-modal";
+import  {CreateGroupModal}  from "@/components/modals/create-group-modal";
 
 export function ModalProvider() {
     const [isMounted, setIsMounted] = useState(false);

@@ -3,16 +3,14 @@ import { redirect } from "next/navigation";
 import { ChannelType, MemberRole } from "@prisma/client";
 import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-
 import { GroupHeader } from "@/components/groups/group-header";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import  {GroupSearch}  from "@/components/groups/group-search";
+import { GroupSearch } from "@/components/groups/group-search";
 import { Separator } from "@/components/ui/separator";
 import { GroupSection } from "@/components/groups/group-section";
 import { GroupChannel } from "@/components/groups/group-channel";
 import { GroupMember } from "@/components/groups/group-member";
+import { useFetchServerAndGroup } from "@/hooks/use-fetch-server-and-group";
 
 const iconMap = {
   [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
@@ -28,34 +26,10 @@ const roleIconMap = {
   [MemberRole.ADMIN]: <ShieldAlert className="h-4 w-4 mr-2 text-rose-500" />
 };
 
-export async function GroupSidebar({ serverId,groupId }: { serverId: string ,groupId: string}) {
-  const profile = await currentProfile();
+export async function GroupSidebar({ serverId, groupId }: { serverId: string, groupId: string }) {
+  const { profile, server, group } = await useFetchServerAndGroup(serverId, groupId);
 
-  if (!profile) return redirect("/");
-
-  const server = await db.server.findUnique({
-    where: {
-      id: serverId
-    },
-    include: {
-      members: {
-        include: {
-          user: true,
-        },
-        orderBy: {
-          role: "asc"
-        }
-      }
-    }
-  });
-  const group = await db.group.findUnique({
-    where: {
-      id: groupId
-    },
-    include:{
-      channels:true
-    }
-  });
+  if (!profile || !server) return redirect("/");
 
   const textChannels = group?.channels.filter(
     (channel) => channel.type === ChannelType.TEXT
@@ -70,8 +44,6 @@ export async function GroupSidebar({ serverId,groupId }: { serverId: string ,gro
   const members = server?.members.filter(
     (member) => member.userId !== profile.id
   );
-
-  if (!server) return redirect("/");
 
   const role = server.members.find(
     (member) => member.userId === profile.id
@@ -134,7 +106,7 @@ export async function GroupSidebar({ serverId,groupId }: { serverId: string ,gro
             />
             <div className="space-y-[2px]">
               {textChannels.map((channel) => (
-                group&&<GroupChannel
+                group && <GroupChannel
                   key={channel.id}
                   channel={channel}
                   role={role}

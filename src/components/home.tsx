@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import qs from "query-string";
 import axios from 'axios';
 import { Test } from '@/components/test';
+import QRCodeScanner from './qr-scan';
 
 import ServerList from './card/server-lists';
 
@@ -26,15 +27,9 @@ async function HomePage() {
         </div>
         <div className='flex md:gap-10 gap-4'>
           <ActionTooltip side='right' align='center' label='QR scan'>
-            <button>
-              <ScanQrCode />
-            </button>
+            <QRCodeScanner />
           </ActionTooltip>
-          <ActionTooltip side='right' align='center' label='click a photo'>
-            <button>
-              <Camera />
-            </button>
-          </ActionTooltip>
+          
           <ActionTooltip side='right' align='center' label='menu'>
             <button>
               <EllipsisVertical />
@@ -43,7 +38,7 @@ async function HomePage() {
         </div>
       </div>
       <div className='w-full flex items-center justify-center'>
-        <ServerSearch />
+        <ServerSearch profileId={profileId}/>
       </div>
       <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-full mx-auto my-4" />
       <div className='w-full flex justify-center'>

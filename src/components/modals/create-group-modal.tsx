@@ -34,8 +34,8 @@ const formSchema = z.object({
   serverId: z.string().min(1, { message: "Server ID is required." })
 });
 
-export default  function CreateGroupModal() {
-  const { isOpen, onClose, type, serverId } = useModal();
+export function CreateGroupModal() {
+  const { isOpen, onClose, type,serverId } = useModal();
   const router = useRouter();
 
   const isModalOpen = isOpen && type === "createGroup";
@@ -45,17 +45,15 @@ export default  function CreateGroupModal() {
     defaultValues: {
       name: "",
       imageUrl: "",
-      serverId: serverId || "" ,// Include serverId in the default values
+      serverId: serverId || "" 
     }
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-   
     try {
       await axios.post("/api/groups", values);
-
       form.reset();
       router.refresh();
       onClose();
@@ -121,7 +119,7 @@ export default  function CreateGroupModal() {
                   </FormItem>
                 )}
               />
-              <FormField
+               <FormField
                 control={form.control}
                 name="serverId"
                 render={({ field }) => (
@@ -137,7 +135,7 @@ export default  function CreateGroupModal() {
               />
             </div>
             <DialogFooter className="bg-gray-300 px-6 py-4">
-              <Button disabled={isLoading} variant="secondary">
+              <Button disabled={isLoading} variant="primary">
                 Create
               </Button>
             </DialogFooter>

@@ -8,21 +8,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import  ModeToggle  from "@/components/mode-toggle";
 import {NavigationItemSkeleton} from "@/components/nevigation/navigation-item-skeleton";
 import { HomeNavigationItem } from "@/components/nevigation/HomeNevigationItem";
+import {Server } from '@prisma/client';
 
-interface Server {
-    id: string;
-    imageUrl: string;
-    name: string;
-    inviteCode: string;
-    userId: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
 
 interface NevigationSidebarClientProps {
     servers: Server[];
+    profileId: string;
+
 }
-function HomeNevigationSidebarClient({servers}: NevigationSidebarClientProps) {
+function HomeNevigationSidebarClient({servers,profileId}: NevigationSidebarClientProps) {
     
     const [isLoading, setIsLoading] = useState(true);
     const [count, setCount] = useState([1,2,3,4,5,6,7,8,9,10]); 
@@ -44,9 +38,8 @@ function HomeNevigationSidebarClient({servers}: NevigationSidebarClientProps) {
           servers.map((server) => (
           <div key={server.id} className="mb-4">
             <HomeNavigationItem
-              id={server.id}
-              imageUrl={server.imageUrl}
-              name={server.name}
+              server={server}
+              profileId={profileId}
             />
           </div>
         ))}
